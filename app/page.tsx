@@ -28,7 +28,7 @@ import { Button } from "@/components/ui/button";
 const INSTITUTIONAL_PIN = "AGRO2026";
 const WORKER_PORTAL_URL = "https://nueva-pag-sigma.vercel.app";
 const LOGO_SRC = "/biofex-logo.jpeg";
-const res = await fetch("/api/telegram/webhook");
+const res = await fetch(`${window.location.origin}/api/telegram/webhook`);
 
 function LogoImage({ className = "h-12 w-12" }: { className?: string }) {
   return (
@@ -1022,7 +1022,7 @@ function TelegramReports() {
 
   const loadReports = async () => {
     try {
-      const res = await fetch(`${window.location.origin}/api/telegram/webhook`);
+      const res = await ffetch(`${window.location.origin}/api/telegram/webhook`);
       const data = await res.json();
       setReports(data.reports || []);
     } catch (error) {
