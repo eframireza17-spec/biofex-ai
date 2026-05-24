@@ -1022,8 +1022,12 @@ function TelegramReports() {
 
   const loadReports = async () => {
     try {
-      const res = await fetch(`${window.location.origin}/api/telegram/webhook`);
+      const res = await fetch("/api/telegram/webhook", {
+        cache: "no-store",
+      });
+
       const data = await res.json();
+
       setReports(data.reports || []);
     } catch (error) {
       console.error("Error cargando reportes:", error);
@@ -1032,14 +1036,73 @@ function TelegramReports() {
 
   useEffect(() => {
     loadReports();
-    const interval = setInterval(loadReports, 3000);
+
+    const interval = setInterval(() => {
+      loadReports();
+    }, 3000);
+
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-      {/* aquí deja igual todo tu diseño actual */}
-    </motion.div>
+    <div className="space-y-4">
+      {reports.length === 0 ? (
+        <div className="rounded-2xl border border-emerald-200 bg-white/80 p-6 text-center text-gray-500 shadow-sm">
+          No hay reportes todavía
+        </div>
+      ) : (
+        reports.map((report: any) => (
+          <div
+            key={report.id}
+            className="rounded-2xl border border-emerald-200 bg-white p-5 shadow-md"
+          >
+            <div className="mb-2 flex items-center justify-between">
+              <h3 className="text-lg font-bold text-emerald-700">
+                Parcela/Lote: {report.parcela}
+              </h3>
+
+              <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700">
+                {report.prioridad}
+              </span>
+            </div>
+
+            <p className="text-sm text-gray-500">{report.fecha}</p>
+
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              <div>
+                <p className="text-sm font-semibold text-gray-700">
+                  Cultivo
+                </p>
+
+                <p className="text-gray-600">{report.cultivo}</p>
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold text-gray-700">
+                  Problema
+                </p>
+
+                <p className="text-gray-600">{report.problema}</p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-sm font-semibold text-gray-700">
+                Recomendación IA
+              </p>
+
+              <p className="text-gray-600">
+                {report.recomendacion}
+              </p>
+            </div>
+
+            <div className="mt-4 rounded-xl bg-emerald-50 p-3 text-sm text-gray-700">
+              <strong>Mensaje original:</strong> {report.mensajeOriginal}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
   );
 }
 export default function App() {
