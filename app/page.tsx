@@ -26,7 +26,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const INSTITUTIONAL_PIN = "AGRO2026";
-const WORKER_PORTAL_URL = "https://pagina-pi-ebon.vercel.app";
+const WORKER_PORTAL_URL = "https://nueva-pag-sigma.vercel.app";
 const LOGO_SRC = "/biofex-logo.jpeg";
 
 function LogoImage({ className = "h-12 w-12" }: { className?: string }) {
