@@ -1022,7 +1022,7 @@ function TelegramReports() {
 
   const loadReports = async () => {
     try {
-      const res = await ffetch(`${window.location.origin}/api/telegram/webhook`);
+      const res = await fetch(`${window.location.origin}/api/telegram/webhook`);
       const data = await res.json();
       setReports(data.reports || []);
     } catch (error) {
