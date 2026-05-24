@@ -1021,9 +1021,13 @@ function TelegramReports() {
   const [reports, setReports] = useState<any[]>([]);
 
   const loadReports = async () => {
-    const res = await fetch("/api/telegram/webhook");
-    const data = await res.json();
-    setReports(data.reports || []);
+    try {
+      const res = await fetch(`${window.location.origin}/api/telegram/webhook`);
+      const data = await res.json();
+      setReports(data.reports || []);
+    } catch (error) {
+      console.error("Error cargando reportes:", error);
+    }
   };
 
   useEffect(() => {
@@ -1034,64 +1038,7 @@ function TelegramReports() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-      <Card className="rounded-3xl border-0 shadow-sm">
-        <CardContent className="p-6">
-          <h3 className="text-2xl font-bold mb-2">Reportes desde Telegram</h3>
-          <p className="text-emerald-700/70 mb-6">
-            Mensajes enviados desde campo convertidos en información operativa.
-          </p>
-
-          {reports.length === 0 ? (
-            <div className="rounded-2xl bg-emerald-100 p-5 text-emerald-700">
-              Aún no hay reportes de Telegram.
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {reports.map((r) => (
-                <div key={r.id} className="rounded-3xl border bg-white p-5">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                    <div>
-                      <p className="text-sm text-emerald-700/70">{r.fecha}</p>
-                      <h4 className="text-lg font-bold">Parcela {r.parcela}</h4>
-                      <p className="text-sm text-emerald-700">{r.mensajeOriginal}</p>
-                    </div>
-
-                    <span className="rounded-full bg-yellow-100 px-3 py-1 text-sm font-semibold text-yellow-700">
-                      Riesgo {r.riesgo}
-                    </span>
-                  </div>
-
-                  <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
-                    <div className="rounded-2xl bg-emerald-50 p-3">
-                      <b>Cultivo</b>
-                      <br />
-                      {r.cultivo}
-                    </div>
-
-                    <div className="rounded-2xl bg-emerald-50 p-3">
-                      <b>Evento</b>
-                      <br />
-                      {r.evento}
-                    </div>
-
-                    <div className="rounded-2xl bg-emerald-50 p-3">
-                      <b>Estado</b>
-                      <br />
-                      {r.estado}
-                    </div>
-
-                    <div className="rounded-2xl bg-emerald-50 p-3">
-                      <b>Recomendación</b>
-                      <br />
-                      {r.recomendacion}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      {/* aquí deja igual todo tu diseño actual */}
     </motion.div>
   );
 }
