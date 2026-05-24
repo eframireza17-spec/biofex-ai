@@ -57,8 +57,6 @@ function AgroDecor() {
 
 const INSTITUTIONAL_PIN = "AGRO2026";
 
-<img src="/biofex-logo.jpeg" />
-
 const areaAccess = [
   {
     area: "Administración",
