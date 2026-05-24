@@ -1,39 +1,57 @@
 import { NextResponse } from "next/server";
 
-let telegramReports: any[] = [];
+let reports: any[] = [];
 
-function analizarMensaje(texto: string) {
+function analizarReporte(texto: string) {
   const lower = texto.toLowerCase();
 
   return {
     id: Date.now(),
+    fecha: new Date().toLocaleString("es-MX"),
     origen: "Telegram",
     mensajeOriginal: texto,
-    parcela: lower.match(/parcela\s*(\d+)/)?.[1] || "No detectada",
+
+    parcela:
+      lower.match(/parcela\s*(\d+)/)?.[1] ||
+      lower.match(/lote\s*(\d+)/)?.[1] ||
+      "No detectada",
+
     cultivo: lower.includes("tomate")
       ? "Tomate"
       : lower.includes("maíz") || lower.includes("maiz")
       ? "Maíz"
       : lower.includes("chile")
       ? "Chile"
+      : lower.includes("sorgo")
+      ? "Sorgo"
       : "No detectado",
-    evento: lower.includes("plaga")
+
+    problema: lower.includes("plaga")
       ? "Posible plaga"
+      : lower.includes("roya")
+      ? "Roya"
+      : lower.includes("humedad")
+      ? "Humedad baja"
       : lower.includes("riego")
       ? "Riego"
-      : lower.includes("humedad")
-      ? "Humedad"
       : "Reporte general",
-    riesgo:
-      lower.includes("plaga") || lower.includes("seca") || lower.includes("baja")
-        ? "Medio"
-        : "Bajo",
+
+    prioridad:
+      lower.includes("urgente") ||
+      lower.includes("alta") ||
+      lower.includes("grave") ||
+      lower.includes("plaga")
+        ? "Alta"
+        : "Media",
+
     recomendacion: lower.includes("plaga")
-      ? "Revisar cultivo y aplicar control preventivo."
+      ? "Realizar inspección técnica y aplicar control preventivo."
       : lower.includes("humedad") || lower.includes("seca")
       ? "Programar riego y revisar humedad del suelo."
-      : "Monitorear la parcela.",
-    fecha: new Date().toLocaleString("es-MX"),
+      : lower.includes("roya")
+      ? "Revisar severidad y considerar aplicación preventiva de fungicida."
+      : "Monitorear el lote y registrar seguimiento.",
+
     estado: "Pendiente de revisión",
   };
 }
@@ -41,16 +59,13 @@ function analizarMensaje(texto: string) {
 export async function GET() {
   return NextResponse.json({
     ok: true,
-    message: "Telegram endpoint activo",
-    reports: telegramReports,
+    reports,
   });
 }
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-
-    console.log("UPDATE TELEGRAM:", JSON.stringify(body, null, 2));
 
     const mensaje = body.message?.text || "";
     const chatId = body.message?.chat?.id;
@@ -59,8 +74,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true });
     }
 
-    const reporte = analizarMensaje(mensaje);
-    telegramReports.unshift(reporte);
+    const reporte = analizarReporte(mensaje);
+    reports.unshift(reporte);
 
     if (chatId && process.env.TELEGRAM_BOT_TOKEN) {
       await fetch(
@@ -70,19 +85,23 @@ export async function POST(req: Request) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             chat_id: chatId,
-            text: `Reporte recibido ✅\nParcela: ${reporte.parcela}\nCultivo: ${reporte.cultivo}\nEvento: ${reporte.evento}\nRiesgo: ${reporte.riesgo}`,
+            text:
+              `Reporte recibido ✅\n\n` +
+              `Parcela/Lote: ${reporte.parcela}\n` +
+              `Cultivo: ${reporte.cultivo}\n` +
+              `Problema: ${reporte.problema}\n` +
+              `Prioridad: ${reporte.prioridad}\n\n` +
+              `Recomendación: ${reporte.recomendacion}`,
           }),
         }
       );
     }
 
     return NextResponse.json({ ok: true, reporte });
-  } catch (error) {
-    console.error("ERROR TELEGRAM:", error);
-
+  } catch {
     return NextResponse.json({
       ok: false,
-      error: "Error procesando mensaje de Telegram",
+      error: "Error procesando reporte",
     });
   }
 }
