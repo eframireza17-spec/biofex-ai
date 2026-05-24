@@ -17,45 +17,16 @@ import {
   Leaf,
   Search,
   ShieldCheck,
-  Wheat,
   Sprout,
+  Wheat,
   UserRound,
 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const LOGO_SRC = "/biofex-logo.jpeg";
-
-function BrandLogo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
-  const sizes = {
-    sm: "h-11 w-11",
-    md: "h-16 w-16",
-    lg: "h-24 w-24",
-  };
-
-  return (
-    <div className={`${sizes[size]} overflow-hidden rounded-full bg-white p-1 shadow-lg ring-2 ring-lime-300/60`}>
-      <img
-        src={LOGO_SRC}
-        alt="Biofex Control"
-        className="h-full w-full rounded-full object-cover"
-      />
-    </div>
-  );
-}
-
-function AgroDecor() {
-  return (
-    <>
-      <div className="pointer-events-none fixed left-[-120px] top-[-120px] h-96 w-96 rounded-full bg-lime-300/30 blur-3xl" />
-      <div className="pointer-events-none fixed bottom-[-140px] right-[-120px] h-[28rem] w-[28rem] rounded-full bg-emerald-500/25 blur-3xl" />
-      <div className="pointer-events-none fixed right-10 top-24 hidden h-40 w-40 rounded-full border-[18px] border-lime-400/20 md:block" />
-    </>
-  );
-}
-
 const INSTITUTIONAL_PIN = "AGRO2026";
+const WORKER_PORTAL_URL = "https://pagina-pi-ebon.vercel.app";
 
 const areaAccess = [
   {
@@ -80,7 +51,7 @@ const users = [
     name: "Admin General",
     license: "ADM-0001",
     specialty: "Administración agrícola",
-    hospital: "Biofex Control",
+    hospital: "AgroTech Control",
     pin: "0000",
     role: "Administrador",
   },
@@ -88,7 +59,7 @@ const users = [
     name: "Ing. Valeria Vargas",
     license: "AGR-8291736",
     specialty: "Producción agrícola",
-    hospital: "Biofex Control",
+    hospital: "AgroTech Control",
     pin: "1234",
     role: "Agrónomo",
   },
@@ -96,7 +67,7 @@ const users = [
     name: "Ing. Alejandro Ramírez",
     license: "AGR-5529182",
     specialty: "Monitoreo",
-    hospital: "Biofex Control",
+    hospital: "AgroTech Control",
     pin: "2222",
     role: "Monitoreo",
   },
@@ -104,7 +75,7 @@ const users = [
     name: "Ing. Fernanda López",
     license: "AGR-7712450",
     specialty: "Riego y fertirriego",
-    hospital: "Biofex Control",
+    hospital: "AgroTech Control",
     pin: "3333",
     role: "Riego y fertirriego",
   },
@@ -112,7 +83,7 @@ const users = [
     name: "Ing. Ricardo Torres",
     license: "AGR-6621980",
     specialty: "Sanidad vegetal",
-    hospital: "Biofex Control",
+    hospital: "AgroTech Control",
     pin: "4444",
     role: "Sanidad vegetal",
   },
@@ -120,7 +91,7 @@ const users = [
     name: "Ing. Mariana Castillo",
     license: "AGR-9044112",
     specialty: "Gestión de insumos",
-    hospital: "Biofex Control",
+    hospital: "AgroTech Control",
     pin: "5555",
     role: "Bodega",
   },
@@ -235,11 +206,11 @@ function AlternativeAgentCard({
         </div>
         <div className="flex-1">
           <h4 className="font-bold text-emerald-950">
-            Agente BioFex: alternativa disponible
+            Agente AgroFex: alternativa disponible
           </h4>
           <p className="mt-1 text-sm text-emerald-700">
             El insumo seleccionado tiene baja disponibilidad o no cubre la cantidad solicitada.
-            Biofex encontró opciones equivalentes por componente u objetivo. La decisión final debe ser validada por el responsable técnico o bodega.
+            AgroFex encontró opciones equivalentes por componente u objetivo. La decisión final debe ser validada por el responsable técnico o bodega.
           </p>
 
           <div className="mt-4 space-y-3">
@@ -301,30 +272,28 @@ function Login({ onLogin }: any) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(132,204,22,.35),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,.35),transparent_35%),linear-gradient(135deg,#052e16,#064e3b_55%,#022c22)] p-6 text-white flex items-center justify-center">
-  <AgroDecor />
+    <div className="min-h-screen bg-[#051008] p-6 text-white flex items-center justify-center">
       <Card className="w-full max-w-5xl overflow-hidden rounded-[2rem] border-0 shadow-2xl">
         <CardContent className="grid grid-cols-1 md:grid-cols-2 p-0">
           <div className="bg-emerald-950 text-white p-8 md:p-12 text-white">
-            <div className="relative mb-10 flex items-center gap-4">
-  <BrandLogo size="md" />
+            <div className="mb-10 flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-950">
                 <Leaf />
               </div>
 
               <div>
                 <h1 className="text-2xl font-bold text-white">
-                  BioFex
+                  AgroFex
                 </h1>
 
                 <p className="text-sm text-emerald-100/80">
-                  Infraestructura Inteligente de trazabilidad
+                  Infraestructura agrointeligente de trazabilidad
                 </p>
               </div>
             </div>
 
             <h2 className="text-4xl font-bold tracking-tight text-white">
-              Infraestructura Inteligente de trazabilidad 
+              Infraestructura agrointeligente de trazabilidad 
             </h2>
 
             <p className="mt-5 text-emerald-100/80 leading-relaxed">
@@ -334,7 +303,7 @@ function Login({ onLogin }: any) {
 
             <div className="mt-8 grid gap-3 text-sm">
               <div className="rounded-2xl bg-white/10 p-4 text-white">
-                1. NIP general
+                1. NIP institucional general
               </div>
 
               <div className="rounded-2xl bg-white/10 p-4 text-white">
@@ -342,9 +311,18 @@ function Login({ onLogin }: any) {
               </div>
 
               <div className="rounded-2xl bg-white/10 p-4 text-white">
-                3. Login personal y PIN
+                3. Login personal por cédula y PIN
               </div>
             </div>
+
+            <a
+              href={WORKER_PORTAL_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 block rounded-3xl bg-lime-300 px-5 py-4 text-center font-black text-emerald-950 shadow-lg transition hover:bg-lime-200"
+            >
+              Acceso directo para trabajadores →
+            </a>
           </div>
 
           <div className="bg-white p-8 md:p-12 text-emerald-950">
@@ -392,7 +370,7 @@ function Login({ onLogin }: any) {
                     }}
                     className="w-full rounded-2xl bg-emerald-950 text-white py-6 text-base hover:bg-emerald-900"
                   >
-                    Validar acceso
+                    Validar acceso institucional
                   </Button>
 
                   <div className="rounded-2xl bg-emerald-100 p-4 text-sm text-emerald-700">
@@ -473,7 +451,7 @@ function Login({ onLogin }: any) {
                     }}
                     className="w-full rounded-2xl bg-white py-6 text-base text-emerald-950 hover:bg-emerald-100 border"
                   >
-                    ← Regresar al NIP 
+                    ← Regresar al NIP institucional
                   </Button>
 
                   <div className="rounded-2xl bg-emerald-100 p-4 text-sm text-emerald-700">
@@ -612,7 +590,7 @@ function Sidebar({ active, setActive, user }: any) {
     <aside className="hidden md:flex w-72 min-h-screen flex-col border-r bg-white p-5">
       <div className="flex items-center gap-3 mb-8">
         <div className="h-11 w-11 rounded-2xl bg-emerald-950 text-white flex items-center justify-center text-white"><Leaf size={24} /></div>
-        <div><h1 className="text-xl font-bold tracking-tight">Biofex AI</h1><p className="text-sm text-emerald-700/70">MVP Biofex</p></div>
+        <div><h1 className="text-xl font-bold tracking-tight">AgroTech AI</h1><p className="text-sm text-emerald-700/70">MVP AgroTech</p></div>
       </div>
       <nav className="space-y-2">
         {items.map(([key, Icon, label]: any) => (
@@ -621,6 +599,16 @@ function Sidebar({ active, setActive, user }: any) {
           </button>
         ))}
       </nav>
+
+      <a
+        href={WORKER_PORTAL_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-5 rounded-3xl bg-lime-300 p-4 text-center font-black text-emerald-950 shadow-sm transition hover:bg-lime-200"
+      >
+        Acceso trabajadores →
+      </a>
+
       <div className="mt-auto rounded-3xl bg-emerald-100 p-4">
         <div className="flex items-center gap-2 font-semibold text-emerald-900"><ShieldCheck size={18} /> Usuario verificado</div>
         <p className="mt-2 text-sm text-emerald-700/70">{user.name}<br />{user.license}<br />{user.specialty}</p>
@@ -705,6 +693,14 @@ function Dashboard({ setActive, inventory, movements }: any) {
           <Button onClick={() => setActive("pharmacy")} className="rounded-2xl bg-white/10 text-white hover:bg-white/20 border border-white/20 px-6 py-6">Ver bodega</Button>
           <Button onClick={() => setActive("trace")} className="rounded-2xl bg-white/10 text-white hover:bg-white/20 border border-white/20 px-6 py-6">Ver trazabilidad</Button>
           <Button onClick={() => setActive("ai")} className="rounded-2xl bg-white/10 text-white hover:bg-white/20 border border-white/20 px-6 py-6">Consultar copiloto IA</Button>
+          <a
+            href={WORKER_PORTAL_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center rounded-2xl bg-lime-300 px-6 py-4 font-black text-emerald-950 transition hover:bg-lime-200"
+          >
+            Acceso trabajadores →
+          </a>
         </div>
       </CardContent></Card>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -737,7 +733,7 @@ function Prescription({ user, inventory, setInventory, setMovements, setActive }
   const createPrescription = () => {
     if (!canCreate) {
       if (alternatives.length > 0) {
-        setMessage("No hay existencia suficiente del insumo seleccionado. Biofex encontró alternativas con el mismo componente para validación agronómica.");
+        setMessage("No hay existencia suficiente del insumo seleccionado. AgroFex encontró alternativas con el mismo componente para validación agronómica.");
       } else {
         setMessage("No hay existencia suficiente disponible para reservar esta orden y no se encontraron alternativas con el mismo componente.");
       }
@@ -948,11 +944,7 @@ function Pharmacy({ movements, setMovements, setInventory }: any) {
     </motion.div>
   );
 }
-<img
-  src="/agrotech-logo.jpeg"
-  alt="Biofex"
-  className="h-16 w-16 rounded-full object-cover bg-white p-1 border-2 border-lime-400 shadow-lg"
-/>
+
 function Traceability({ movements }: any) {
   return <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><Card className="rounded-3xl border-0 shadow-sm"><CardContent className="p-6"><h3 className="text-xl font-bold mb-5">Timeline de trazabilidad</h3><div className="space-y-4">{movements.map((m: any) => <div key={m.id} className="rounded-3xl border bg-white p-5"><div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3"><div><p className="text-sm text-emerald-700/70 flex items-center gap-2"><CalendarClock size={15}/> {m.date}</p><h4 className="text-lg font-bold mt-1">{m.input}</h4><p className="text-xs font-semibold text-emerald-700/50">Folio: {m.folio || "AG-DEMO-001"}</p><p className="text-sm text-emerald-700/70">Lote {m.lot} · Cantidad: {m.quantity}</p><p className="text-sm text-emerald-700/70">Cultivo / incidencia: {m.crop || "No registrado"}</p></div><div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm"><div className="rounded-2xl bg-emerald-50 p-3"><b>Lote</b><br/>{m.plot || "Almacén"}</div><div className="rounded-2xl bg-emerald-50 p-3"><b>Responsable</b><br/>{m.user}</div><div className="rounded-2xl bg-emerald-50 p-3"><b>Estado</b><br/><StatusBadge status={m.status} /></div></div></div></div>)}</div></CardContent></Card></motion.div>;
 }
@@ -971,7 +963,7 @@ function AIChat({ inventory, movements, user }: any) {
       );
 
       if (!requestedMedicine) {
-        setAnswer("Biofex no encontró el insumo solicitado. Puedes consultar por nombre comercial o componente, por ejemplo: Imidacloprid, Mancozeb o Fósforo.");
+        setAnswer("AgroFex no encontró el insumo solicitado. Puedes consultar por nombre comercial o componente, por ejemplo: Imidacloprid, Mancozeb o Fósforo.");
         return;
       }
 
@@ -986,7 +978,7 @@ function AIChat({ inventory, movements, user }: any) {
         `Insumo consultado: ${requestedMedicine.input}. Componente / objetivo: ${requestedMedicine.component}. ` +
         `Alternativas disponibles para validación agronómica: ` +
         alternatives.map((alt: any) => `${alt.input} con ${getAvailableUnits(alt)} unidades disponibles, lote ${alt.lot}`).join("; ") +
-        ". Nota: Biofex sugiere opciones operativas, la decisión final debe validarla personal agrónomo o bodega."
+        ". Nota: AgroFex sugiere opciones operativas, la decisión final debe validarla personal agrónomo o bodega."
       );
     }
     else if (q.includes("agotarse") || q.includes("stock")) {
@@ -1124,8 +1116,15 @@ export default function App() {
       <Sidebar active={active} setActive={setActive} user={user} />
       <main className="flex-1 p-4 md:p-8 overflow-hidden">
         <div className="md:hidden mb-4 flex items-center justify-between rounded-3xl bg-white p-4 shadow-sm">
-          <div className="flex items-center gap-2 font-bold"><Leaf /> Biofex AI</div>
-          <span className="text-sm text-emerald-700/70">Demo Biofex</span>
+          <div className="flex items-center gap-2 font-bold"><Leaf /> AgroTech AI</div>
+          <a
+            href={WORKER_PORTAL_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-2xl bg-lime-300 px-3 py-2 text-sm font-bold text-emerald-950"
+          >
+            Trabajadores
+          </a>
         </div>
 
         <Header
