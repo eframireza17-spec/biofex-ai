@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Activity,
@@ -573,6 +573,7 @@ function Sidebar({ active, setActive, doctor }: any) {
     ["pharmacy", ClipboardList, "Farmacia"],
     ["trace", FileSearch, "Trazabilidad"],
     ["ai", Bot, "Copiloto IA"],
+    ["telegram", Bot, "Telegram Campo"],
   ];
 
   return (
@@ -978,7 +979,84 @@ function AIChat({ inventory, movements, doctor }: any) {
 
   return <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><Card className="rounded-3xl border-0 shadow-sm bg-slate-900 text-white text-white"><CardContent className="p-6 md:p-8"><div className="flex items-center gap-3 mb-5"><div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center"><Bot/></div><div><h3 className="text-2xl font-bold text-white">Agente Biofex</h3><p className="text-slate-300 text-sm">Consulta trazabilidad, riesgos, existencias y alternativas por principio activo.</p></div></div><div className="flex flex-col md:flex-row gap-3"><input value={question} onChange={(e) => setQuestion(e.target.value)} className="flex-1 rounded-2xl bg-white px-4 py-4 text-slate-900 outline-none"/><Button onClick={ask} className="rounded-2xl bg-white text-slate-900 hover:bg-slate-100 py-6 px-6">Consultar agente</Button></div><div className="mt-6 rounded-3xl bg-white/10 p-6 leading-relaxed text-slate-100">{answer}</div><div className="mt-5 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">{["¿Qué alternativa hay para Paracetamol?", "¿Qué medicamentos están por agotarse?", "¿Dónde quedó el lote CRX-2026?", "Resumen de farmacia"].map((q) => <button key={q} onClick={() => setQuestion(q)} className="rounded-2xl bg-white/10 p-3 text-left hover:bg-white/20 transition text-white">{q}</button>)}</div></CardContent></Card></motion.div>;
 }
+function TelegramReports() {
+  const [reports, setReports] = useState<any[]>([]);
 
+  const loadReports = async () => {
+    const res = await fetch("/api/telegram/webhook");
+    const data = await res.json();
+    setReports(data.reports || []);
+  };
+
+  useEffect(() => {
+    loadReports();
+    const interval = setInterval(loadReports, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+      <Card className="rounded-3xl border-0 shadow-sm">
+        <CardContent className="p-6">
+          <h3 className="text-2xl font-bold mb-2">Reportes desde Telegram</h3>
+          <p className="text-slate-500 mb-6">
+            Mensajes enviados desde campo convertidos en información operativa.
+          </p>
+
+          {reports.length === 0 ? (
+            <div className="rounded-2xl bg-slate-100 p-5 text-slate-600">
+              Aún no hay reportes de Telegram.
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {reports.map((r) => (
+                <div key={r.id} className="rounded-3xl border bg-white p-5">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <div>
+                      <p className="text-sm text-slate-500">{r.fecha}</p>
+                      <h4 className="text-lg font-bold">Parcela {r.parcela}</h4>
+                      <p className="text-sm text-slate-600">{r.mensajeOriginal}</p>
+                    </div>
+
+                    <span className="rounded-full bg-yellow-100 px-3 py-1 text-sm font-semibold text-yellow-700">
+                      Riesgo {r.riesgo}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
+                    <div className="rounded-2xl bg-slate-50 p-3">
+                      <b>Cultivo</b>
+                      <br />
+                      {r.cultivo}
+                    </div>
+
+                    <div className="rounded-2xl bg-slate-50 p-3">
+                      <b>Evento</b>
+                      <br />
+                      {r.evento}
+                    </div>
+
+                    <div className="rounded-2xl bg-slate-50 p-3">
+                      <b>Estado</b>
+                      <br />
+                      {r.estado}
+                    </div>
+
+                    <div className="rounded-2xl bg-slate-50 p-3">
+                      <b>Recomendación</b>
+                      <br />
+                      {r.recomendacion}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
 export default function App() {
   const [doctor, setDoctor] = useState<any>(null);
   const [active, setActive] = useState("dashboard");
@@ -1000,6 +1078,7 @@ export default function App() {
     warehouse: <Warehouse inventory={inventory} setInventory={setInventory} setMovements={setMovements} />,
     pharmacy: <Pharmacy movements={movements} setMovements={setMovements} inventory={inventory} setInventory={setInventory} />,
     trace: <Traceability movements={movements} />,
+    
     ai: <AIChat inventory={inventory} movements={movements} doctor={doctor} />,
   };
 
