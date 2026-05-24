@@ -18,13 +18,46 @@ import {
   Search,
   ShieldCheck,
   Wheat,
+  Sprout,
   UserRound,
 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+const LOGO_SRC = "/agrotech-logo.jpeg";
+
+function BrandLogo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
+  const sizes = {
+    sm: "h-11 w-11",
+    md: "h-16 w-16",
+    lg: "h-24 w-24",
+  };
+
+  return (
+    <div className={`${sizes[size]} overflow-hidden rounded-full bg-white p-1 shadow-lg ring-2 ring-lime-300/60`}>
+      <img
+        src={LOGO_SRC}
+        alt="AgroTech Control"
+        className="h-full w-full rounded-full object-cover"
+      />
+    </div>
+  );
+}
+
+function AgroDecor() {
+  return (
+    <>
+      <div className="pointer-events-none fixed left-[-120px] top-[-120px] h-96 w-96 rounded-full bg-lime-300/30 blur-3xl" />
+      <div className="pointer-events-none fixed bottom-[-140px] right-[-120px] h-[28rem] w-[28rem] rounded-full bg-emerald-500/25 blur-3xl" />
+      <div className="pointer-events-none fixed right-10 top-24 hidden h-40 w-40 rounded-full border-[18px] border-lime-400/20 md:block" />
+    </>
+  );
+}
+
 const INSTITUTIONAL_PIN = "AGRO2026";
+
+<img src="/agrotech-logo.jpeg" />
 
 const areaAccess = [
   {
@@ -204,7 +237,7 @@ function AlternativeAgentCard({
         </div>
         <div className="flex-1">
           <h4 className="font-bold text-emerald-950">
-            Agente AgroFex: alternativa disponible
+            Agente BioFex: alternativa disponible
           </h4>
           <p className="mt-1 text-sm text-emerald-700">
             El insumo seleccionado tiene baja disponibilidad o no cubre la cantidad solicitada.
@@ -270,28 +303,30 @@ function Login({ onLogin }: any) {
   };
 
   return (
-    <div className="min-h-screen bg-[#051008] p-6 text-white flex items-center justify-center">
+    <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(132,204,22,.35),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,.35),transparent_35%),linear-gradient(135deg,#052e16,#064e3b_55%,#022c22)] p-6 text-white flex items-center justify-center">
+  <AgroDecor />
       <Card className="w-full max-w-5xl overflow-hidden rounded-[2rem] border-0 shadow-2xl">
         <CardContent className="grid grid-cols-1 md:grid-cols-2 p-0">
           <div className="bg-emerald-950 text-white p-8 md:p-12 text-white">
-            <div className="mb-10 flex items-center gap-3">
+            <div className="relative mb-10 flex items-center gap-4">
+  <BrandLogo size="md" />
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-950">
                 <Leaf />
               </div>
 
               <div>
                 <h1 className="text-2xl font-bold text-white">
-                  AgroFex
+                  BioFex
                 </h1>
 
                 <p className="text-sm text-emerald-100/80">
-                  Infraestructura agrointeligente de trazabilidad
+                  Infraestructura Inteligente de trazabilidad
                 </p>
               </div>
             </div>
 
             <h2 className="text-4xl font-bold tracking-tight text-white">
-              Infraestructura agrointeligente de trazabilidad 
+              Infraestructura Inteligente de trazabilidad 
             </h2>
 
             <p className="mt-5 text-emerald-100/80 leading-relaxed">
@@ -301,7 +336,7 @@ function Login({ onLogin }: any) {
 
             <div className="mt-8 grid gap-3 text-sm">
               <div className="rounded-2xl bg-white/10 p-4 text-white">
-                1. NIP institucional general
+                1. NIP general
               </div>
 
               <div className="rounded-2xl bg-white/10 p-4 text-white">
@@ -309,7 +344,7 @@ function Login({ onLogin }: any) {
               </div>
 
               <div className="rounded-2xl bg-white/10 p-4 text-white">
-                3. Login personal por cédula y PIN
+                3. Login personal y PIN
               </div>
             </div>
           </div>
@@ -359,7 +394,7 @@ function Login({ onLogin }: any) {
                     }}
                     className="w-full rounded-2xl bg-emerald-950 text-white py-6 text-base hover:bg-emerald-900"
                   >
-                    Validar acceso institucional
+                    Validar acceso
                   </Button>
 
                   <div className="rounded-2xl bg-emerald-100 p-4 text-sm text-emerald-700">
@@ -440,7 +475,7 @@ function Login({ onLogin }: any) {
                     }}
                     className="w-full rounded-2xl bg-white py-6 text-base text-emerald-950 hover:bg-emerald-100 border"
                   >
-                    ← Regresar al NIP institucional
+                    ← Regresar al NIP 
                   </Button>
 
                   <div className="rounded-2xl bg-emerald-100 p-4 text-sm text-emerald-700">
