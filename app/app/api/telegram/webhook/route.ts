@@ -7,8 +7,11 @@ function analizarReporte(texto: string) {
 
   return {
     id: Date.now(),
+
     fecha: new Date().toLocaleString("es-MX"),
+
     origen: "Telegram",
+
     mensajeOriginal: texto,
 
     parcela:
@@ -71,10 +74,13 @@ export async function POST(req: Request) {
     const chatId = body.message?.chat?.id;
 
     if (!mensaje) {
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({
+        ok: true,
+      });
     }
 
     const reporte = analizarReporte(mensaje);
+
     reports.unshift(reporte);
 
     if (chatId && process.env.TELEGRAM_BOT_TOKEN) {
@@ -82,9 +88,14 @@ export async function POST(req: Request) {
         `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
           body: JSON.stringify({
             chat_id: chatId,
+
             text:
               `Reporte recibido ✅\n\n` +
               `Parcela/Lote: ${reporte.parcela}\n` +
@@ -97,8 +108,13 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({ ok: true, reporte });
-  } catch {
+    return NextResponse.json({
+      ok: true,
+      reporte,
+    });
+  } catch (error) {
+    console.error(error);
+
     return NextResponse.json({
       ok: false,
       error: "Error procesando reporte",
