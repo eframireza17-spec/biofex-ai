@@ -27,6 +27,17 @@ import { Button } from "@/components/ui/button";
 
 const INSTITUTIONAL_PIN = "AGRO2026";
 const WORKER_PORTAL_URL = "https://pagina-pi-ebon.vercel.app";
+const LOGO_SRC = "/biofex-logo.jpeg";
+
+function LogoImage({ className = "h-12 w-12" }: { className?: string }) {
+  return (
+    <img
+      src={LOGO_SRC}
+      alt="Biofex"
+      className={`${className} rounded-2xl object-cover bg-white p-1 border-2 border-lime-300 shadow-lg`}
+    />
+  );
+}
 
 const areaAccess = [
   {
@@ -206,11 +217,11 @@ function AlternativeAgentCard({
         </div>
         <div className="flex-1">
           <h4 className="font-bold text-emerald-950">
-            Agente AgroFex: alternativa disponible
+            Agente Biofex: alternativa disponible
           </h4>
           <p className="mt-1 text-sm text-emerald-700">
             El insumo seleccionado tiene baja disponibilidad o no cubre la cantidad solicitada.
-            AgroFex encontró opciones equivalentes por componente u objetivo. La decisión final debe ser validada por el responsable técnico o bodega.
+            Biofex encontró opciones equivalentes por componente u objetivo. La decisión final debe ser validada por el responsable técnico o bodega.
           </p>
 
           <div className="mt-4 space-y-3">
@@ -277,13 +288,11 @@ function Login({ onLogin }: any) {
         <CardContent className="grid grid-cols-1 md:grid-cols-2 p-0">
           <div className="bg-emerald-950 text-white p-8 md:p-12 text-white">
             <div className="mb-10 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-950">
-                <Leaf />
-              </div>
+              <LogoImage className="h-14 w-14" />
 
               <div>
-                <h1 className="text-2xl font-bold text-white">
-                  AgroFex
+                <h1 className="text-3xl font-black text-white">
+                  Biofex
                 </h1>
 
                 <p className="text-sm text-emerald-100/80">
@@ -292,8 +301,8 @@ function Login({ onLogin }: any) {
               </div>
             </div>
 
-            <h2 className="text-4xl font-bold tracking-tight text-white">
-              Infraestructura agrointeligente de trazabilidad 
+            <h2 className="text-5xl font-black tracking-tight text-white">
+              COMPAGRO
             </h2>
 
             <p className="mt-5 text-emerald-100/80 leading-relaxed">
@@ -319,9 +328,9 @@ function Login({ onLogin }: any) {
               href={WORKER_PORTAL_URL}
               target="_blank"
               rel="noreferrer"
-              className="mt-6 block rounded-3xl bg-lime-300 px-5 py-4 text-center font-black text-emerald-950 shadow-lg transition hover:bg-lime-200"
+              className="mt-8 block rounded-[2rem] bg-lime-300 px-8 py-6 text-center text-xl font-black text-emerald-950 shadow-2xl ring-4 ring-white/20 transition hover:scale-[1.02] hover:bg-lime-200"
             >
-              Acceso directo para trabajadores →
+              👷 Acceso directo para trabajadores →
             </a>
           </div>
 
@@ -589,8 +598,8 @@ function Sidebar({ active, setActive, user }: any) {
   return (
     <aside className="hidden md:flex w-72 min-h-screen flex-col border-r bg-white p-5">
       <div className="flex items-center gap-3 mb-8">
-        <div className="h-11 w-11 rounded-2xl bg-emerald-950 text-white flex items-center justify-center text-white"><Leaf size={24} /></div>
-        <div><h1 className="text-xl font-bold tracking-tight">AgroTech AI</h1><p className="text-sm text-emerald-700/70">MVP AgroTech</p></div>
+        <LogoImage className="h-12 w-12" />
+        <div><h1 className="text-xl font-black tracking-tight">Biofex</h1><p className="text-sm text-emerald-700/70">COMPAGRO · IA agrícola</p></div>
       </div>
       <nav className="space-y-2">
         {items.map(([key, Icon, label]: any) => (
@@ -604,9 +613,9 @@ function Sidebar({ active, setActive, user }: any) {
         href={WORKER_PORTAL_URL}
         target="_blank"
         rel="noreferrer"
-        className="mt-5 rounded-3xl bg-lime-300 p-4 text-center font-black text-emerald-950 shadow-sm transition hover:bg-lime-200"
+        className="mt-5 rounded-[2rem] bg-lime-300 p-5 text-center text-lg font-black text-emerald-950 shadow-xl ring-2 ring-lime-500/30 transition hover:scale-[1.02] hover:bg-lime-200"
       >
-        Acceso trabajadores →
+        👷 Acceso trabajadores →
       </a>
 
       <div className="mt-auto rounded-3xl bg-emerald-100 p-4">
@@ -633,7 +642,7 @@ function Header({
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-emerald-950">
-            Control inteligente de insumos agrícolas
+            COMPAGRO
           </h2>
         </div>
 
@@ -685,7 +694,7 @@ function Dashboard({ setActive, inventory, movements }: any) {
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
       <Card className="mb-6 rounded-3xl border-0 bg-emerald-950 text-white text-white shadow-sm"><CardContent className="p-8">
         <p className="text-sm font-semibold text-emerald-100/80">MVP para operación agrícola</p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-white">Trazabilidad inteligente de insumos agrícolas</h1>
+        <h1 className="mt-3 text-5xl font-black tracking-tight text-white">COMPAGRO</h1>
         <p className="mt-4 max-w-3xl text-emerald-100/80">Controla cada insumo desde orden agronómica hasta bodega, almacén, lote, lote, cultivo/incidencia, responsable y existencia restante.</p>
         <div className="mt-8 flex flex-wrap gap-4">
           <Button onClick={() => setActive("prescription")} className="rounded-2xl bg-white text-emerald-950 hover:bg-slate-200 px-6 py-6">Generar orden de campo</Button>
@@ -697,9 +706,9 @@ function Dashboard({ setActive, inventory, movements }: any) {
             href={WORKER_PORTAL_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-2xl bg-lime-300 px-6 py-4 font-black text-emerald-950 transition hover:bg-lime-200"
+            className="inline-flex items-center justify-center rounded-[2rem] bg-lime-300 px-8 py-6 text-lg font-black text-emerald-950 shadow-xl ring-2 ring-white/20 transition hover:scale-[1.02] hover:bg-lime-200"
           >
-            Acceso trabajadores →
+            👷 Acceso trabajadores →
           </a>
         </div>
       </CardContent></Card>
@@ -733,7 +742,7 @@ function Prescription({ user, inventory, setInventory, setMovements, setActive }
   const createPrescription = () => {
     if (!canCreate) {
       if (alternatives.length > 0) {
-        setMessage("No hay existencia suficiente del insumo seleccionado. AgroFex encontró alternativas con el mismo componente para validación agronómica.");
+        setMessage("No hay existencia suficiente del insumo seleccionado. Biofex encontró alternativas con el mismo componente para validación agronómica.");
       } else {
         setMessage("No hay existencia suficiente disponible para reservar esta orden y no se encontraron alternativas con el mismo componente.");
       }
@@ -963,7 +972,7 @@ function AIChat({ inventory, movements, user }: any) {
       );
 
       if (!requestedMedicine) {
-        setAnswer("AgroFex no encontró el insumo solicitado. Puedes consultar por nombre comercial o componente, por ejemplo: Imidacloprid, Mancozeb o Fósforo.");
+        setAnswer("Biofex no encontró el insumo solicitado. Puedes consultar por nombre comercial o componente, por ejemplo: Imidacloprid, Mancozeb o Fósforo.");
         return;
       }
 
@@ -978,7 +987,7 @@ function AIChat({ inventory, movements, user }: any) {
         `Insumo consultado: ${requestedMedicine.input}. Componente / objetivo: ${requestedMedicine.component}. ` +
         `Alternativas disponibles para validación agronómica: ` +
         alternatives.map((alt: any) => `${alt.input} con ${getAvailableUnits(alt)} unidades disponibles, lote ${alt.lot}`).join("; ") +
-        ". Nota: AgroFex sugiere opciones operativas, la decisión final debe validarla personal agrónomo o bodega."
+        ". Nota: Biofex sugiere opciones operativas, la decisión final debe validarla personal agrónomo o bodega."
       );
     }
     else if (q.includes("agotarse") || q.includes("stock")) {
@@ -1005,7 +1014,7 @@ function AIChat({ inventory, movements, user }: any) {
     }
   };
 
-  return <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><Card className="rounded-3xl border-0 shadow-sm bg-emerald-950 text-white text-white"><CardContent className="p-6 md:p-8"><div className="flex items-center gap-3 mb-5"><div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center"><Bot/></div><div><h3 className="text-2xl font-bold text-white">Agente AgroFex</h3><p className="text-emerald-100/80 text-sm">Consulta trazabilidad, riesgos, existencias y alternativas por componente.</p></div></div><div className="flex flex-col md:flex-row gap-3"><input value={question} onChange={(e) => setQuestion(e.target.value)} className="flex-1 rounded-2xl bg-white px-4 py-4 text-emerald-950 outline-none"/><Button onClick={ask} className="rounded-2xl bg-white text-emerald-950 hover:bg-emerald-100 py-6 px-6">Consultar agente</Button></div><div className="mt-6 rounded-3xl bg-white/10 p-6 leading-relaxed text-slate-100">{answer}</div><div className="mt-5 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">{["¿Qué alternativa hay para Confidor?", "¿Qué insumos están por agotarse?", "¿Dónde quedó el lote CAG-2026?", "Resumen de bodega"].map((q) => <button key={q} onClick={() => setQuestion(q)} className="rounded-2xl bg-white/10 p-3 text-left hover:bg-white/20 transition text-white">{q}</button>)}</div></CardContent></Card></motion.div>;
+  return <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><Card className="rounded-3xl border-0 shadow-sm bg-emerald-950 text-white text-white"><CardContent className="p-6 md:p-8"><div className="flex items-center gap-3 mb-5"><div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center"><Bot/></div><div><h3 className="text-2xl font-bold text-white">Agente Biofex</h3><p className="text-emerald-100/80 text-sm">Consulta trazabilidad, riesgos, existencias y alternativas por componente.</p></div></div><div className="flex flex-col md:flex-row gap-3"><input value={question} onChange={(e) => setQuestion(e.target.value)} className="flex-1 rounded-2xl bg-white px-4 py-4 text-emerald-950 outline-none"/><Button onClick={ask} className="rounded-2xl bg-white text-emerald-950 hover:bg-emerald-100 py-6 px-6">Consultar agente</Button></div><div className="mt-6 rounded-3xl bg-white/10 p-6 leading-relaxed text-slate-100">{answer}</div><div className="mt-5 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">{["¿Qué alternativa hay para Confidor?", "¿Qué insumos están por agotarse?", "¿Dónde quedó el lote CAG-2026?", "Resumen de bodega"].map((q) => <button key={q} onClick={() => setQuestion(q)} className="rounded-2xl bg-white/10 p-3 text-left hover:bg-white/20 transition text-white">{q}</button>)}</div></CardContent></Card></motion.div>;
 }
 function TelegramReports() {
   const [reports, setReports] = useState<any[]>([]);
@@ -1116,14 +1125,14 @@ export default function App() {
       <Sidebar active={active} setActive={setActive} user={user} />
       <main className="flex-1 p-4 md:p-8 overflow-hidden">
         <div className="md:hidden mb-4 flex items-center justify-between rounded-3xl bg-white p-4 shadow-sm">
-          <div className="flex items-center gap-2 font-bold"><Leaf /> AgroTech AI</div>
+          <div className="flex items-center gap-2 font-black"><LogoImage className="h-9 w-9" /> Biofex</div>
           <a
             href={WORKER_PORTAL_URL}
             target="_blank"
             rel="noreferrer"
-            className="rounded-2xl bg-lime-300 px-3 py-2 text-sm font-bold text-emerald-950"
+            className="rounded-2xl bg-lime-300 px-4 py-3 text-sm font-black text-emerald-950 shadow-md"
           >
-            Trabajadores
+            👷 Trabajadores
           </a>
         </div>
 
