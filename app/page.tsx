@@ -25,7 +25,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const LOGO_SRC = "/agrotech-logo.jpeg";
+const LOGO_SRC = "/biofex-logo.jpeg";
 
 function BrandLogo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
   const sizes = {
@@ -38,7 +38,7 @@ function BrandLogo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
     <div className={`${sizes[size]} overflow-hidden rounded-full bg-white p-1 shadow-lg ring-2 ring-lime-300/60`}>
       <img
         src={LOGO_SRC}
-        alt="AgroTech Control"
+        alt="Biofex Control"
         className="h-full w-full rounded-full object-cover"
       />
     </div>
@@ -57,7 +57,7 @@ function AgroDecor() {
 
 const INSTITUTIONAL_PIN = "AGRO2026";
 
-<img src="/agrotech-logo.jpeg" />
+<img src="/biofex-logo.jpeg" />
 
 const areaAccess = [
   {
@@ -82,7 +82,7 @@ const users = [
     name: "Admin General",
     license: "ADM-0001",
     specialty: "Administración agrícola",
-    hospital: "AgroTech Control",
+    hospital: "Biofex Control",
     pin: "0000",
     role: "Administrador",
   },
@@ -90,7 +90,7 @@ const users = [
     name: "Ing. Valeria Vargas",
     license: "AGR-8291736",
     specialty: "Producción agrícola",
-    hospital: "AgroTech Control",
+    hospital: "Biofex Control",
     pin: "1234",
     role: "Agrónomo",
   },
@@ -98,7 +98,7 @@ const users = [
     name: "Ing. Alejandro Ramírez",
     license: "AGR-5529182",
     specialty: "Monitoreo",
-    hospital: "AgroTech Control",
+    hospital: "Biofex Control",
     pin: "2222",
     role: "Monitoreo",
   },
@@ -106,7 +106,7 @@ const users = [
     name: "Ing. Fernanda López",
     license: "AGR-7712450",
     specialty: "Riego y fertirriego",
-    hospital: "AgroTech Control",
+    hospital: "Biofex Control",
     pin: "3333",
     role: "Riego y fertirriego",
   },
@@ -114,7 +114,7 @@ const users = [
     name: "Ing. Ricardo Torres",
     license: "AGR-6621980",
     specialty: "Sanidad vegetal",
-    hospital: "AgroTech Control",
+    hospital: "Biofex Control",
     pin: "4444",
     role: "Sanidad vegetal",
   },
@@ -122,7 +122,7 @@ const users = [
     name: "Ing. Mariana Castillo",
     license: "AGR-9044112",
     specialty: "Gestión de insumos",
-    hospital: "AgroTech Control",
+    hospital: "Biofex Control",
     pin: "5555",
     role: "Bodega",
   },
@@ -241,7 +241,7 @@ function AlternativeAgentCard({
           </h4>
           <p className="mt-1 text-sm text-emerald-700">
             El insumo seleccionado tiene baja disponibilidad o no cubre la cantidad solicitada.
-            AgroFex encontró opciones equivalentes por componente u objetivo. La decisión final debe ser validada por el responsable técnico o bodega.
+            Biofex encontró opciones equivalentes por componente u objetivo. La decisión final debe ser validada por el responsable técnico o bodega.
           </p>
 
           <div className="mt-4 space-y-3">
@@ -614,7 +614,7 @@ function Sidebar({ active, setActive, user }: any) {
     <aside className="hidden md:flex w-72 min-h-screen flex-col border-r bg-white p-5">
       <div className="flex items-center gap-3 mb-8">
         <div className="h-11 w-11 rounded-2xl bg-emerald-950 text-white flex items-center justify-center text-white"><Leaf size={24} /></div>
-        <div><h1 className="text-xl font-bold tracking-tight">AgroTech AI</h1><p className="text-sm text-emerald-700/70">MVP AgroTech</p></div>
+        <div><h1 className="text-xl font-bold tracking-tight">Biofex AI</h1><p className="text-sm text-emerald-700/70">MVP Biofex</p></div>
       </div>
       <nav className="space-y-2">
         {items.map(([key, Icon, label]: any) => (
@@ -739,7 +739,7 @@ function Prescription({ user, inventory, setInventory, setMovements, setActive }
   const createPrescription = () => {
     if (!canCreate) {
       if (alternatives.length > 0) {
-        setMessage("No hay existencia suficiente del insumo seleccionado. AgroFex encontró alternativas con el mismo componente para validación agronómica.");
+        setMessage("No hay existencia suficiente del insumo seleccionado. Biofex encontró alternativas con el mismo componente para validación agronómica.");
       } else {
         setMessage("No hay existencia suficiente disponible para reservar esta orden y no se encontraron alternativas con el mismo componente.");
       }
@@ -969,7 +969,7 @@ function AIChat({ inventory, movements, user }: any) {
       );
 
       if (!requestedMedicine) {
-        setAnswer("AgroFex no encontró el insumo solicitado. Puedes consultar por nombre comercial o componente, por ejemplo: Imidacloprid, Mancozeb o Fósforo.");
+        setAnswer("Biofex no encontró el insumo solicitado. Puedes consultar por nombre comercial o componente, por ejemplo: Imidacloprid, Mancozeb o Fósforo.");
         return;
       }
 
@@ -984,7 +984,7 @@ function AIChat({ inventory, movements, user }: any) {
         `Insumo consultado: ${requestedMedicine.input}. Componente / objetivo: ${requestedMedicine.component}. ` +
         `Alternativas disponibles para validación agronómica: ` +
         alternatives.map((alt: any) => `${alt.input} con ${getAvailableUnits(alt)} unidades disponibles, lote ${alt.lot}`).join("; ") +
-        ". Nota: AgroFex sugiere opciones operativas, la decisión final debe validarla personal agrónomo o bodega."
+        ". Nota: Biofex sugiere opciones operativas, la decisión final debe validarla personal agrónomo o bodega."
       );
     }
     else if (q.includes("agotarse") || q.includes("stock")) {
@@ -1011,7 +1011,7 @@ function AIChat({ inventory, movements, user }: any) {
     }
   };
 
-  return <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><Card className="rounded-3xl border-0 shadow-sm bg-emerald-950 text-white text-white"><CardContent className="p-6 md:p-8"><div className="flex items-center gap-3 mb-5"><div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center"><Bot/></div><div><h3 className="text-2xl font-bold text-white">Agente AgroFex</h3><p className="text-emerald-100/80 text-sm">Consulta trazabilidad, riesgos, existencias y alternativas por componente.</p></div></div><div className="flex flex-col md:flex-row gap-3"><input value={question} onChange={(e) => setQuestion(e.target.value)} className="flex-1 rounded-2xl bg-white px-4 py-4 text-emerald-950 outline-none"/><Button onClick={ask} className="rounded-2xl bg-white text-emerald-950 hover:bg-emerald-100 py-6 px-6">Consultar agente</Button></div><div className="mt-6 rounded-3xl bg-white/10 p-6 leading-relaxed text-slate-100">{answer}</div><div className="mt-5 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">{["¿Qué alternativa hay para Confidor?", "¿Qué insumos están por agotarse?", "¿Dónde quedó el lote CAG-2026?", "Resumen de bodega"].map((q) => <button key={q} onClick={() => setQuestion(q)} className="rounded-2xl bg-white/10 p-3 text-left hover:bg-white/20 transition text-white">{q}</button>)}</div></CardContent></Card></motion.div>;
+  return <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><Card className="rounded-3xl border-0 shadow-sm bg-emerald-950 text-white text-white"><CardContent className="p-6 md:p-8"><div className="flex items-center gap-3 mb-5"><div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center"><Bot/></div><div><h3 className="text-2xl font-bold text-white">Agente Biofex</h3><p className="text-emerald-100/80 text-sm">Consulta trazabilidad, riesgos, existencias y alternativas por componente.</p></div></div><div className="flex flex-col md:flex-row gap-3"><input value={question} onChange={(e) => setQuestion(e.target.value)} className="flex-1 rounded-2xl bg-white px-4 py-4 text-emerald-950 outline-none"/><Button onClick={ask} className="rounded-2xl bg-white text-emerald-950 hover:bg-emerald-100 py-6 px-6">Consultar agente</Button></div><div className="mt-6 rounded-3xl bg-white/10 p-6 leading-relaxed text-slate-100">{answer}</div><div className="mt-5 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">{["¿Qué alternativa hay para Confidor?", "¿Qué insumos están por agotarse?", "¿Dónde quedó el lote CAG-2026?", "Resumen de bodega"].map((q) => <button key={q} onClick={() => setQuestion(q)} className="rounded-2xl bg-white/10 p-3 text-left hover:bg-white/20 transition text-white">{q}</button>)}</div></CardContent></Card></motion.div>;
 }
 function TelegramReports() {
   const [reports, setReports] = useState<any[]>([]);
@@ -1122,8 +1122,8 @@ export default function App() {
       <Sidebar active={active} setActive={setActive} user={user} />
       <main className="flex-1 p-4 md:p-8 overflow-hidden">
         <div className="md:hidden mb-4 flex items-center justify-between rounded-3xl bg-white p-4 shadow-sm">
-          <div className="flex items-center gap-2 font-bold"><Leaf /> AgroTech AI</div>
-          <span className="text-sm text-emerald-700/70">Demo Agro</span>
+          <div className="flex items-center gap-2 font-bold"><Leaf /> Biofex AI</div>
+          <span className="text-sm text-emerald-700/70">Demo Biofex</span>
         </div>
 
         <Header
